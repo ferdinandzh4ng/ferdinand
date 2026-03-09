@@ -2,6 +2,8 @@ import Link from "next/link";
 import { SocialLinks } from "@/components/SocialLinks";
 import { SectionCard } from "@/components/SectionCard";
 import { HomeCollage } from "@/components/HomeCollage";
+import { ScrollReveal } from "@/components/ScrollReveal";
+import { CollageScrollFade } from "@/components/CollageScrollFade";
 import {
   homeBio,
   homeCollageImages,
@@ -13,7 +15,7 @@ export default function Home() {
     <div className="min-h-[calc(100vh-4rem)]">
       {/* Full-height hero: name/bio vertically centered, collage fills right */}
       <div className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-6xl flex-col gap-8 px-4 py-10 lg:flex-row lg:items-stretch lg:gap-12 lg:px-6 lg:pt-10 lg:pb-0">
-        <div className="flex min-w-0 flex-1 flex-col justify-center text-left">
+        <ScrollReveal className="flex min-w-0 flex-1 flex-col justify-center text-left">
           <h1 className="font-hero text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl">
             Ferdinand
           </h1>
@@ -45,17 +47,21 @@ export default function Home() {
               More About Me
             </Link>
           </div>
-        </div>
-        <div className="flex min-h-[320px] min-w-0 flex-1 justify-center lg:min-h-0 lg:justify-end">
-          <HomeCollage images={homeCollageImages} />
-        </div>
+        </ScrollReveal>
+        <ScrollReveal delay={100} className="flex min-h-[320px] min-w-0 flex-1 justify-center lg:min-h-0 lg:min-w-[28rem] lg:justify-end">
+          <CollageScrollFade className="h-full w-full min-w-0 lg:max-w-md">
+            <HomeCollage images={homeCollageImages} />
+          </CollageScrollFade>
+        </ScrollReveal>
       </div>
 
       {/* Big section cards with image, title, short bio */}
       <section className="mx-auto max-w-6xl px-4 pt-16 pb-16 sm:px-6 sm:pt-20 sm:pb-20">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {homeSectionCards.map((card) => (
-            <SectionCard key={card.href} card={card} />
+          {homeSectionCards.map((card, i) => (
+            <ScrollReveal key={card.href} delay={i * 80} className="h-full">
+              <SectionCard card={card} />
+            </ScrollReveal>
           ))}
         </div>
       </section>

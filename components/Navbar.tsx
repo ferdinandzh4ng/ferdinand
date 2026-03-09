@@ -3,15 +3,27 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NAV_LINKS, SITE_NAME } from "@/lib/constants";
 
 export function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#252529]/95 backdrop-blur">
+    <header
+      className={`sticky top-0 z-50 border-b bg-[#252529]/95 backdrop-blur transition-all duration-300 ${
+        scrolled ? "border-white/20 shadow-lg shadow-black/20" : "border-white/10"
+      }`}
+    >
       <nav className="flex w-full items-center py-4 pl-4 pr-4 sm:py-5 sm:pl-6 sm:pr-6">
         {/* Ferdinand – all the way left with padding */}
         <div className="flex flex-1 justify-start">
