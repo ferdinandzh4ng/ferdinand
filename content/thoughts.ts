@@ -4,7 +4,7 @@ export interface Thought {
 }
 
 export const randomThoughts: Thought[] = [
-  { text: "Building things on the web is fun." },
-  { text: "Badminton keeps me moving." },
-  { text: "Always learning something new." },
+  { text: "Popular to contrary belief, I know exactly what I'm doing - Tony Stark" },
+  { text: "Lock in!" },
+  { text: "At the end of the day, we all had 24 hours, so make it count." },
 ];
